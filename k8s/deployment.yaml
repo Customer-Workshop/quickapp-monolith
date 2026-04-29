@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quickapp
+  namespace: quickapp
+  labels:
+    app.kubernetes.io/name: quickapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: quickapp
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: quickapp
+    spec:
+      containers:
+        - name: quickapp
+          # Replace with your ECR repository URI
+          image: <AWS_ACCOUNT_ID>.dkr.ecr.<REGION>.amazonaws.com/quickapp:latest
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: quickapp-config
+            - secretRef:
+                name: quickapp-secret
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"

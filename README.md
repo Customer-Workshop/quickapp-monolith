@@ -342,6 +342,101 @@ Released under the [MIT License](https://github.com/emonney/QuickApp/blob/master
 
 ---
 
+## Docker & Containerization
+
+### Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/) (with Docker Compose v2)
+
+### Build and Run with Docker Compose
+
+```bash
+# Build and start the application (web app + SQL Server)
+docker compose up --build
+
+# Run in detached mode
+docker compose up --build -d
+
+# View logs
+docker compose logs -f webapp
+
+# Stop and remove containers
+docker compose down
+
+# Stop and remove containers, volumes, and data
+docker compose down -v
+```
+
+The application will be available at **http://localhost:8080**.
+
+Default credentials: `admin` / `tempP@ss123`
+
+### Environment Variables
+
+| Variable | Default | Description |
+|---|---|---|
+| `SA_PASSWORD` | `YourStrong!Passw0rd` | SQL Server SA password |
+| `ConnectionStrings__DefaultConnection` | *(set in docker-compose)* | Database connection string |
+| `ASPNETCORE_ENVIRONMENT` | `Development` | ASP.NET Core environment |
+
+---
+
+## Kubernetes (EKS) Deployment
+
+### Prerequisites
+
+- AWS CLI configured with appropriate permissions
+- `kubectl` configured for your EKS cluster
+- Amazon ECR repository created
+
+### Push Image to ECR
+
+```bash
+# Authenticate Docker to ECR
+aws ecr get-login-password --region <REGION> | docker login --username AWS --password-stdin <AWS_ACCOUNT_ID>.dkr.ecr.<REGION>.amazonaws.com
+
+# Build and tag
+docker build -t quickapp .
+docker tag quickapp:latest <AWS_ACCOUNT_ID>.dkr.ecr.<REGION>.amazonaws.com/quickapp:latest
+
+# Push
+docker push <AWS_ACCOUNT_ID>.dkr.ecr.<REGION>.amazonaws.com/quickapp:latest
+```
+
+### Deploy to EKS
+
+```bash
+# Apply all Kubernetes manifests
+kubectl apply -f k8s/namespace.yaml
+kubectl apply -f k8s/configmap.yaml
+kubectl apply -f k8s/secret.yaml        # Update with real credentials first
+kubectl apply -f k8s/deployment.yaml     # Update image URI first
+kubectl apply -f k8s/service.yaml
+kubectl apply -f k8s/ingress.yaml
+
+# Verify deployment
+kubectl get pods -n quickapp
+kubectl get svc -n quickapp
+kubectl get ingress -n quickapp
+```
+
+> **Important**: Before deploying, update `k8s/secret.yaml` with your actual RDS connection string and `k8s/deployment.yaml` with your ECR image URI. In production, use [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/) with the [External Secrets Operator](https://external-secrets.io/) instead of plain Kubernetes Secrets.
+
+---
+
+## Decomposition Plan
+
+This repository represents **Phase 1** (Containerize As-Is) of a multi-phase microservice decomposition strategy. See [docs/DECOMPOSITION_PLAN.md](docs/DECOMPOSITION_PLAN.md) for the full plan covering:
+
+- Current monolith architecture analysis
+- Identified bounded contexts (Identity, Customer, Product Catalog, Order)
+- Key coupling points to break
+- Phased decomposition roadmap (Phases 1-6)
+- AWS EKS infrastructure recommendations
+- Inter-service communication patterns
+
+---
+
 **If you are tired of AI-generated codebases that slowly collapse under their own weight, start from something solid.**
 
 [YOUR FEEDBACK](mailto:feedback@ebenmonney.com) | [FOLLOW ME](https://twitter.com/kommand) | [📺 SUBSCRIBE ON YOUTUBE](https://www.youtube.com/@EbenMonney)

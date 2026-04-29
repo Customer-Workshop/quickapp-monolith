@@ -1,0 +1,15 @@
+**/bin
+**/obj
+**/node_modules
+**/.angular
+**/dist
+.git
+.vs
+.vscode
+*.md
+!**/Dockerfile
+.github
+ai-rules
+Logs
+k8s
+docs

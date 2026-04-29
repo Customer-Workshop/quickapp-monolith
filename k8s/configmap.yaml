@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: quickapp-config
+  namespace: quickapp
+  labels:
+    app.kubernetes.io/name: quickapp
+data:
+  ASPNETCORE_ENVIRONMENT: "Production"
