@@ -1,1 +1,14 @@
-﻿
+﻿.empty-state-card {
+  max-width: 480px;
+  margin: 3rem auto;
+
+  .card-body {
+    padding: 3rem 2rem;
+  }
+
+  .empty-state-icon {
+    font-size: 3rem;
+    color: var(--bs-secondary-color);
+    margin-bottom: 1rem;
+  }
+}
