@@ -3,5 +3,55 @@
 </header>
 
 <div [@fadeInOut]>
-  <span class="text-muted">-- Sample Page --</span>
+  <div class="row control-box">
+    <div class="col-lg-8">
+      <div class="search-box">
+        <app-search-box (searchChange)="onSearchChanged($event)" placeholder="{{'products.management.Search' | translate}}" />
+      </div>
+    </div>
+  </div>
+
+  <div class="table-responsive products-table">
+    <table class="table table-sm table-striped table-hover align-middle mb-0">
+      <thead>
+        <tr>
+          <th scope="col">{{'products.management.Name' | translate}}</th>
+          <th scope="col">{{'products.management.Category' | translate}}</th>
+          <th scope="col" class="text-end">{{'products.management.BuyingPrice' | translate}}</th>
+          <th scope="col" class="text-end">{{'products.management.SellingPrice' | translate}}</th>
+          <th scope="col" class="text-end">{{'products.management.UnitsInStock' | translate}}</th>
+          <th scope="col">{{'products.management.Status' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (product of products; track product.id) {
+          <tr>
+            <td>{{product.name}}</td>
+            <td>{{product.productCategoryName}}</td>
+            <td class="text-end">{{product.buyingPrice | number:'1.2-2'}}</td>
+            <td class="text-end">{{product.sellingPrice | number:'1.2-2'}}</td>
+            <td class="text-end">{{product.unitsInStock}}</td>
+            <td>
+              @if (product.isDiscontinued) {
+                <span class="badge text-bg-secondary">{{'products.management.Discontinued' | translate}}</span>
+              }
+              @else if (product.isActive) {
+                <span class="badge text-bg-success">{{'products.management.Active' | translate}}</span>
+              }
+              @else {
+                <span class="badge text-bg-warning">{{'products.management.Inactive' | translate}}</span>
+              }
+            </td>
+          </tr>
+        }
+        @empty {
+          <tr>
+            <td colspan="6" class="text-center text-muted py-3">
+              {{(loadingIndicator ? 'products.management.Loading' : 'products.management.NoProductsFound') | translate}}
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
 </div>

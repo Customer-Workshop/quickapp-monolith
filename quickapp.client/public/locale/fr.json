@@ -354,6 +354,26 @@
       "Saving": "En cours d'enregistrement..."
     }
   },
+  "products": {
+    "management": {
+      "Search": "Rechercher un produit...",
+      "Loading": "Chargement...",
+      "NoProductsFound": "Aucun produit trouvé",
+      "Name": "Nom",
+      "Category": "Catégorie",
+      "BuyingPrice": "Prix d'achat",
+      "SellingPrice": "Prix de vente",
+      "UnitsInStock": "Unités en stock",
+      "Status": "Statut",
+      "Active": "Actif",
+      "Inactive": "Inactif",
+      "Discontinued": "Abandonné"
+    },
+    "alerts": {
+      "LoadError": "Erreur de chargement",
+      "RetrieveProductsFailed": "Impossible de récupérer les produits depuis le serveur.\nErreur : {{error}}"
+    }
+  },
   "notifications": {
     "Delete": "Supprimer notification",
     "Pin": "Épingler notification",
