@@ -3,5 +3,75 @@
 </header>
 
 <div [@fadeInOut]>
-  <span class="text-muted">-- Sample Page --</span>
+  <div class="row control-box">
+    <div class="col-lg-8">
+      <div class="search-box">
+        <app-search-box (searchChange)="onSearchChanged($event)" placeholder="{{'products.management.Search' | translate}}" />
+      </div>
+    </div>
+  </div>
+
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th role="button" (click)="sortBy('name')">
+          {{'products.management.Name' | translate}}
+          @if (sortColumn === 'name') {
+            <i class="fa" [class.fa-caret-up]="sortAscending" [class.fa-caret-down]="!sortAscending" aria-hidden="true"></i>
+          }
+        </th>
+        <th role="button" (click)="sortBy('productCategoryName')">
+          {{'products.management.Category' | translate}}
+          @if (sortColumn === 'productCategoryName') {
+            <i class="fa" [class.fa-caret-up]="sortAscending" [class.fa-caret-down]="!sortAscending" aria-hidden="true"></i>
+          }
+        </th>
+        <th role="button" class="text-end" (click)="sortBy('sellingPrice')">
+          {{'products.management.SellingPrice' | translate}}
+          @if (sortColumn === 'sellingPrice') {
+            <i class="fa" [class.fa-caret-up]="sortAscending" [class.fa-caret-down]="!sortAscending" aria-hidden="true"></i>
+          }
+        </th>
+        <th role="button" class="text-end" (click)="sortBy('unitsInStock')">
+          {{'products.management.UnitsInStock' | translate}}
+          @if (sortColumn === 'unitsInStock') {
+            <i class="fa" [class.fa-caret-up]="sortAscending" [class.fa-caret-down]="!sortAscending" aria-hidden="true"></i>
+          }
+        </th>
+        <th>{{'products.management.Status' | translate}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (product of rows; track product.id) {
+        <tr>
+          <td>
+            {{product.name}}
+            <div class="text-muted small">{{product.description}}</div>
+          </td>
+          <td>{{product.productCategoryName}}</td>
+          <td class="text-end">{{product.sellingPrice | currency}}</td>
+          <td class="text-end">{{product.unitsInStock}}</td>
+          <td>
+            @if (product.isDiscontinued) {
+              <span class="badge bg-secondary">{{'products.management.Discontinued' | translate}}</span>
+            } @else if (product.isActive) {
+              <span class="badge bg-success">{{'products.management.Active' | translate}}</span>
+            } @else {
+              <span class="badge bg-warning text-dark">{{'products.management.Inactive' | translate}}</span>
+            }
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="5" class="text-center text-muted">
+            @if (loadingIndicator) {
+              <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+            } @else {
+              {{'products.management.NoProducts' | translate}}
+            }
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
 </div>
