@@ -354,6 +354,26 @@
       "Saving": "保存中..."
     }
   },
+  "products": {
+    "management": {
+      "Search": "搜索产品...",
+      "Loading": "加载中...",
+      "NoProductsFound": "未找到产品",
+      "Name": "名称",
+      "Category": "类别",
+      "BuyingPrice": "进货价",
+      "SellingPrice": "销售价",
+      "UnitsInStock": "库存数量",
+      "Status": "状态",
+      "Active": "启用",
+      "Inactive": "停用",
+      "Discontinued": "已停产"
+    },
+    "alerts": {
+      "LoadError": "加载错误",
+      "RetrieveProductsFailed": "无法从服务器获取产品。\n错误：{{error}}"
+    }
+  },
   "notifications": {
     "Delete": "删除通知",
     "Pin": "置顶通知",

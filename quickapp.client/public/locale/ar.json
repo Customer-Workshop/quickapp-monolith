@@ -354,6 +354,26 @@
       "Saving": "جار الحفظ..."
     }
   },
+  "products": {
+    "management": {
+      "Search": "البحث عن منتج...",
+      "Loading": "جارٍ التحميل...",
+      "NoProductsFound": "لم يتم العثور على منتجات",
+      "Name": "الاسم",
+      "Category": "الفئة",
+      "BuyingPrice": "سعر الشراء",
+      "SellingPrice": "سعر البيع",
+      "UnitsInStock": "الوحدات في المخزون",
+      "Status": "الحالة",
+      "Active": "نشط",
+      "Inactive": "غير نشط",
+      "Discontinued": "متوقف"
+    },
+    "alerts": {
+      "LoadError": "خطأ في التحميل",
+      "RetrieveProductsFailed": "تعذر جلب المنتجات من الخادم.\nخطأ: {{error}}"
+    }
+  },
   "notifications": {
     "Delete": "حذف الإشعار",
     "Pin": "رفع الأولوية",

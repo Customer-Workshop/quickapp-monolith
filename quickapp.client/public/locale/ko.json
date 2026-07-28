@@ -354,6 +354,26 @@
       "Saving": "절약..."
     }
   },
+  "products": {
+    "management": {
+      "Search": "제품 검색...",
+      "Loading": "불러오는 중...",
+      "NoProductsFound": "제품을 찾을 수 없습니다",
+      "Name": "이름",
+      "Category": "분류",
+      "BuyingPrice": "구매 가격",
+      "SellingPrice": "판매 가격",
+      "UnitsInStock": "재고 수량",
+      "Status": "상태",
+      "Active": "활성",
+      "Inactive": "비활성",
+      "Discontinued": "단종"
+    },
+    "alerts": {
+      "LoadError": "불러오기 오류",
+      "RetrieveProductsFailed": "서버에서 제품을 가져올 수 없습니다.\n오류: {{error}}"
+    }
+  },
   "notifications": {
     "Delete": "알림 삭제",
     "Pin": "핀 알림",
