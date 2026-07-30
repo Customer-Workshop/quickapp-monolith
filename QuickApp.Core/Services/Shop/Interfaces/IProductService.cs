@@ -10,6 +10,6 @@ namespace QuickApp.Core.Services.Shop
 {
     public interface IProductService
     {
-        IEnumerable<Product> GetAllProductsData();
+        Task<IEnumerable<Product>> GetAllProductsDataAsync();
     }
 }

@@ -378,5 +378,19 @@
       "Important": "Marcar como importante",
       "AddTask": "Agregar Tarea"
     }
+  },
+  "products": {
+    "management": {
+      "Search": "Search for product or category...",
+      "Name": "Name",
+      "Category": "Category",
+      "SellingPrice": "Selling Price",
+      "UnitsInStock": "Units In Stock",
+      "Status": "Status",
+      "Active": "Active",
+      "Inactive": "Inactive",
+      "Discontinued": "Discontinued",
+      "NoProducts": "No products found"
+    }
   }
 }

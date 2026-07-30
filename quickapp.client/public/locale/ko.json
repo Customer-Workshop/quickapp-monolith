@@ -378,5 +378,19 @@
       "Important": "중요한 것으로 표시",
       "AddTask": "할 일 추가"
     }
+  },
+  "products": {
+    "management": {
+      "Search": "Search for product or category...",
+      "Name": "Name",
+      "Category": "Category",
+      "SellingPrice": "Selling Price",
+      "UnitsInStock": "Units In Stock",
+      "Status": "Status",
+      "Active": "Active",
+      "Inactive": "Inactive",
+      "Discontinued": "Discontinued",
+      "NoProducts": "No products found"
+    }
   }
 }

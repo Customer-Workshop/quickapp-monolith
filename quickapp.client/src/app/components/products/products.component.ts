@@ -39,15 +39,18 @@ export class ProductsComponent implements OnInit {
   }
 
   loadProducts() {
+    this.alertService.startLoadingMessage();
     this.loadingIndicator = true;
 
     this.productService.getProducts().subscribe({
       next: products => {
+        this.alertService.stopLoadingMessage();
         this.loadingIndicator = false;
         this.rowsCache = [...products];
         this.rows = this.sortRows([...products]);
       },
       error: error => {
+        this.alertService.stopLoadingMessage();
         this.loadingIndicator = false;
         this.alertService.showStickyMessage('Load Error',
           `Unable to retrieve products from the server.\r\nError: "${Utilities.getHttpResponseMessage(error)}"`,

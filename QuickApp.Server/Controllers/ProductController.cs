@@ -5,31 +5,29 @@
 // ---------------------------------------
 
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuickApp.Core.Services.Shop;
 using QuickApp.Server.ViewModels.Shop;
 
 namespace QuickApp.Server.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ProductController : ControllerBase
+    [Authorize]
+    public class ProductController : BaseApiController
     {
-        private readonly IMapper _mapper;
-        private readonly ILogger _logger;
         private readonly IProductService _productService;
 
-        public ProductController(IMapper mapper, ILogger<ProductController> logger, IProductService productService)
+        public ProductController(ILogger<ProductController> logger, IMapper mapper,
+            IProductService productService) : base(logger, mapper)
         {
-            _mapper = mapper;
-            _logger = logger;
             _productService = productService;
         }
 
         [HttpGet]
-        public IActionResult Get()
+        [ProducesResponseType(200, Type = typeof(IEnumerable<ProductVM>))]
+        public async Task<IActionResult> Get()
         {
-            var allProducts = _productService.GetAllProductsData();
+            var allProducts = await _productService.GetAllProductsDataAsync();
             return Ok(_mapper.Map<IEnumerable<ProductVM>>(allProducts));
         }
     }

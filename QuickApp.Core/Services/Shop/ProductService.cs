@@ -12,9 +12,9 @@ namespace QuickApp.Core.Services.Shop
 {
     public class ProductService(ApplicationDbContext dbContext) : IProductService
     {
-        public IEnumerable<Product> GetAllProductsData() => dbContext.Products
+        public async Task<IEnumerable<Product>> GetAllProductsDataAsync() => await dbContext.Products
                 .Include(p => p.ProductCategory)
                 .OrderBy(p => p.Name)
-                .ToList();
+                .ToListAsync();
     }
 }
