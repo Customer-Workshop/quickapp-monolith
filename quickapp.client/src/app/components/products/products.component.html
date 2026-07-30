@@ -3,5 +3,48 @@
 </header>
 
 <div [@fadeInOut]>
-  <span class="text-muted">-- Sample Page --</span>
+  <div class="products-toolbar">
+    <label class="visually-hidden" for="product-search">Search products</label>
+    <input id="product-search" class="form-control" type="search" placeholder="Search by product name"
+      [(ngModel)]="searchTerm" (ngModelChange)="onSearchChanged()">
+  </div>
+
+  @if (loadingIndicator) {
+    <div class="text-muted py-3">Loading products...</div>
+  } @else {
+    <div class="table-responsive">
+      <table class="table table-hover align-middle products-table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Category</th>
+            <th scope="col" class="text-end">Selling Price</th>
+            <th scope="col" class="text-end">Units In Stock</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (product of rows; track product.id) {
+            <tr>
+              <td>{{ product.name }}</td>
+              <td>{{ product.description || '—' }}</td>
+              <td>{{ product.productCategoryName || '—' }}</td>
+              <td class="text-end">{{ product.sellingPrice | currency }}</td>
+              <td class="text-end">{{ product.unitsInStock }}</td>
+              <td>
+                <span class="badge" [ngClass]="product.isActive && !product.isDiscontinued ? 'text-bg-success' : 'text-bg-secondary'">
+                  {{ product.isDiscontinued ? 'Discontinued' : (product.isActive ? 'Active' : 'Inactive') }}
+                </span>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td class="text-muted text-center py-4" colspan="6">No products found.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
 </div>

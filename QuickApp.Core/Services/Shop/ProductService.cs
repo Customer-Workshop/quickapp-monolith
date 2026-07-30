@@ -6,8 +6,15 @@
 
 namespace QuickApp.Core.Services.Shop
 {
-    public class ProductService() : IProductService
-    {
+    using Microsoft.EntityFrameworkCore;
+    using QuickApp.Core.Infrastructure;
+    using QuickApp.Core.Models.Shop;
 
+    public class ProductService(ApplicationDbContext dbContext) : IProductService
+    {
+        public IEnumerable<Product> GetAllProductsData() => dbContext.Products
+            .Include(p => p.ProductCategory)
+            .OrderBy(p => p.Name)
+            .ToList();
     }
 }

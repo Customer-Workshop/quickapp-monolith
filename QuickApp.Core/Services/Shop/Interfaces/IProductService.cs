@@ -4,10 +4,12 @@
 // (c) 2024 www.ebenmonney.com/mit-license
 // ---------------------------------------
 
+using QuickApp.Core.Models.Shop;
+
 namespace QuickApp.Core.Services.Shop
 {
     public interface IProductService
     {
-
+        IEnumerable<Product> GetAllProductsData();
     }
 }

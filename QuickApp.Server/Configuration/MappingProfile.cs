@@ -55,6 +55,7 @@ namespace QuickApp.Server.Configuration
                 .ReverseMap();
 
             CreateMap<Product, ProductVM>()
+                .ForMember(d => d.ProductCategoryName, map => map.MapFrom(s => s.ProductCategory.Name))
                 .ReverseMap();
 
             CreateMap<Order, OrderVM>()
