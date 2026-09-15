@@ -284,6 +284,9 @@ FakesAssemblies/
 # Node.js Tools for Visual Studio
 .ntvs_analysis.dat
 node_modules/
+quickapp.client/playwright-report/
+quickapp.client/test-results/
+quickapp.client/blob-report/
 
 # Visual Studio 6 build log
 *.plg

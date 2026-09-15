@@ -46,7 +46,7 @@ namespace QuickApp.Server.Controllers
                     ?? await _userManager.FindByEmailAsync(request.Username);
 
                 if (user == null)
-                    return GetForbidResult("Please check that your username and password is correct.");
+                    return GetForbidResult("invalid_username_or_password");
 
                 if (!user.IsEnabled)
                     return GetForbidResult("The specified user account is disabled.");
@@ -61,7 +61,7 @@ namespace QuickApp.Server.Controllers
                     return GetForbidResult("The specified user is not allowed to sign in.");
 
                 if (!result.Succeeded)
-                    return GetForbidResult("Please check that your username and password is correct.");
+                    return GetForbidResult("invalid_username_or_password");
 
                 var principal = await CreateClaimsPrincipalAsync(user, request.GetScopes());
 

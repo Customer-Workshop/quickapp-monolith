@@ -129,8 +129,13 @@ builder.Services.AddOpenIddict()
             }
         }
 
-        options.UseAspNetCore()
-               .EnableTokenEndpointPassthrough();
+        var aspNetCoreOptions = options.UseAspNetCore()
+                                       .EnableTokenEndpointPassthrough();
+
+        if (builder.Environment.IsDevelopment())
+        {
+            aspNetCoreOptions.DisableTransportSecurityRequirement();
+        }
     })
     .AddValidation(options =>
     {
@@ -276,4 +281,3 @@ catch (Exception ex)
 /************* RUN APP *************/
 
 app.Run();
-
