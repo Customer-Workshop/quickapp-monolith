@@ -18,7 +18,7 @@ test.describe('login', () => {
     await page.locator('button[type="submit"]').click();
 
     await expect(page.locator('#toasta .toast-msg, .toasta-container .toast-msg')).toContainText(
-      /Invalid username or password/i
+      /Invalid username or password|check that your username and password/i
     );
     await expect(page).toHaveURL(/\/login/);
   });

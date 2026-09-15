@@ -25,8 +25,6 @@ QuickApp is an opinionated Angular 21 + ASP.NET Core 10 starter that solves the 
 
 ## Why QuickApp Exists (in the Age of AI)
 
-See [Playwright end-to-end test instructions](quickapp.client/e2e/README.md) for local browser test setup and execution.
-
 AI can generate code fast. It is also very good at:
 - ✅ Generating new features
 - ✅ Repeating existing patterns
@@ -221,6 +219,10 @@ Install from the [Visual Studio Marketplace](https://marketplace.visualstudio.co
 - Password: `tempP@ss123`
 
 > **Note:** Change these passwords immediately in production!
+
+### End-to-End Tests
+
+Browser tests run with Playwright from `quickapp.client` via `npm run test:e2e`. See [quickapp.client/e2e/README.md](quickapp.client/e2e/README.md) for setup.
 
 ---
 
